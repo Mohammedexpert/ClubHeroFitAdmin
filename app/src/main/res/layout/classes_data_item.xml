@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_15sdp"
+    android:layout_margin="@dimen/_10sdp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:layout_margin="@dimen/_5sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/name_classes_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Demo name"
+            android:layout_weight="1"
+            android:textSize="@dimen/_15sdp"
+            android:textColor="@color/TextViewColor"
+            android:textStyle="bold"/>
+
+
+
+        <Button
+            android:id="@+id/booking_classes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Book Now"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:textSize="@dimen/_15sdp"
+            android:textColor="@color/EditTextColor"
+            android:backgroundTint="@color/TextViewColor"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/colorPrimary"
+            android:layout_margin="@dimen/_5sdp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/_5sdp"
+        android:weightSum="2"
+        >
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Time:"
+            android:layout_weight="1"
+            android:textSize="@dimen/_15sdp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            />
+
+
+
+        <TextView
+            android:id="@+id/time_classes_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="09:00 - 10:00 AM"
+            android:textAllCaps="false"
+            android:layout_weight="1"
+            android:textSize="@dimen/_15sdp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

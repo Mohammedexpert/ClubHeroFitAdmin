@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#252D38</color>
+    <color name="colorPrimaryDark">#252D38</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="TextViewColor">#2699FB</color>
+    <color name="EditTextHint">#BCE0FD</color>
+    <color name="EditTextColor">#FFFFFF</color>
+    <color name="OnlineColor">#3EF356</color>
+</resources>

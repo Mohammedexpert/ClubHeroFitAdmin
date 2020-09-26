@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".MainActivity">
+
+
+<TextView
+    android:id="@+id/loginText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Login To Your Account"
+    android:textSize="@dimen/_15sdp"
+    android:textColor="@color/TextViewColor"
+    android:textStyle="bold"
+    android:gravity="center_horizontal"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginTop="@dimen/_180sdp"
+    android:layout_marginBottom="@dimen/_20sdp"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
+    />
+
+<EditText
+    android:id="@+id/email"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Email"
+    android:textSize="@dimen/_12sdp"
+    android:textColor="@color/EditTextColor"
+    android:textColorHint="@color/EditTextHint"
+    android:textStyle="bold"
+    android:gravity="left"
+    android:paddingStart="@dimen/_15sdp"
+    android:paddingEnd="@dimen/_15sdp"
+    android:padding="@dimen/_10sdp"
+    android:background="@drawable/edittextbg"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/loginText"
+    android:layout_marginTop="@dimen/_20sdp"
+    android:layout_marginBottom="@dimen/_15sdp"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
+    />
+<EditText
+    android:id="@+id/password"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Password"
+    android:textSize="@dimen/_12sdp"
+    android:textColor="@color/EditTextColor"
+    android:textColorHint="@color/EditTextHint"
+    android:textStyle="bold"
+    android:inputType="textPassword"
+    android:gravity="left"
+    android:background="@drawable/edittextbg"
+    android:padding="@dimen/_10sdp"
+    android:paddingStart="@dimen/_15sdp"
+    android:paddingEnd="@dimen/_15sdp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/email"
+    android:layout_marginTop="@dimen/_15sdp"
+    android:layout_marginBottom="@dimen/_15sdp"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
+    />
+
+
+
+<Button
+    android:id="@+id/loginBtn"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Log in"
+    android:textSize="@dimen/_15sdp"
+    android:textColor="@color/EditTextColor"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:background="@color/TextViewColor"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginBottom="@dimen/_15sdp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+
+    />
+
+
+
+<ProgressBar
+    android:id="@+id/progressLogin"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/password"
+    app:layout_constraintBottom_toTopOf="@id/loginBtn"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
