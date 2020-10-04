@@ -160,15 +160,13 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ViewHold
 
             View add_item_layout = inflater.inflate(R.layout.add_new_item_layout_classes, null);
 
-            final EditText name = add_item_layout.findViewById(R.id.name_classes_item);
-            final EditText time = add_item_layout.findViewById(R.id.time_classes_item);
+            final EditText name = add_item_layout.findViewById(R.id.name);
+            final EditText time = add_item_layout.findViewById(R.id.time);
 
-//            name.setText(classesLists.get(position).getName());
-//            time.setText(classesLists.get(position).getTime());
+            name.setText(classesLists.get(position).getName());
+            time.setText(classesLists.get(position).getTime());
 
             alertDialog.setView(add_item_layout);
-
-
 //        alertDialog.setIcon(R.drawable.ic_baseline_add_24);
 
 

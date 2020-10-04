@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_classes" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.arslan6015.clubherofitadmin.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_articles"
+        android:name="com.arslan6015.clubherofitadmin.ui.Article.ArticleFragment"
+        android:label="@string/menu_article"
+        tools:layout="@layout/fragment_article" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.arslan6015.clubherofitadmin.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_news"
+        android:name="com.arslan6015.clubherofitadmin.ui.News.NewsFragment"
+        android:label="@string/menu_news"
+        tools:layout="@layout/fragment_news" />
 </navigation>

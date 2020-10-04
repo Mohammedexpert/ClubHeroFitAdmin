@@ -1,38 +1,26 @@
-package com.arslan6015.clubherofitadmin.ui.Classes;
+package com.arslan6015.clubherofitadmin.ui.News;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.arslan6015.clubherofitadmin.Adapters.ClassesAdapter;
+import com.arslan6015.clubherofitadmin.Adapters.NewsAdapter;
 import com.arslan6015.clubherofitadmin.Model.ClassesList;
+import com.arslan6015.clubherofitadmin.Model.NewsList;
 import com.arslan6015.clubherofitadmin.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,67 +28,67 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-import java.util.UUID;
 
-import static android.app.Activity.RESULT_OK;
-
-public class ClassesFragment extends Fragment {
-
-    FloatingActionButton fabClasses;
-    EditText name, time;
+public class NewsFragment extends Fragment {
+    public static String saveCurrentDate,saveCurrentTime;
+    FloatingActionButton fab_news;
+    EditText title, desp;
 
     //Firebase
     FirebaseDatabase db;
-    DatabaseReference itemListClasses;
-    RecyclerView recycler_classes;
+    DatabaseReference itemListNews;
+    RecyclerView recycler_news;
     RecyclerView.LayoutManager layoutManager;
-    private List<ClassesList> classesLists;
+    private List<NewsList> newsLists;
     //I use RollNoAdapter as static because in the Viewholder i have to call.
-    public static ClassesAdapter adapterClasses;
+    public static NewsAdapter adapterNews;
+//    private String saveCurrentDate, saveCurrentTime;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_classes, container, false);
 
+        View root = inflater.inflate(R.layout.fragment_news, container, false);
         db = FirebaseDatabase.getInstance();
-        itemListClasses = db.getReference().child("Classes");
+        itemListNews = db.getReference().child("News");
 
-        fabClasses = root.findViewById(R.id.fabClasses);
-        fabClasses.setOnClickListener(new View.OnClickListener() {
+        fab_news = root.findViewById(R.id.fab_news);
+        fab_news.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialogBox();
             }
         });
 
-        recycler_classes = root.findViewById(R.id.recycler_classes);
-        recycler_classes.setHasFixedSize(true);
+        recycler_news = root.findViewById(R.id.recycler_news);
+        recycler_news.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        recycler_classes.setLayoutManager(layoutManager);
-        classesLists = new ArrayList<>();
+        recycler_news.setLayoutManager(layoutManager);
+        newsLists = new ArrayList<>();
 //        add predefined firebase listener
-        itemListClasses.addValueEventListener(new ValueEventListener() {
+        itemListNews.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     //use foreach loop
-                    classesLists.clear();
+                    newsLists.clear();
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         //get value from the model class
-                        ClassesList l = postSnapshot.getValue(ClassesList.class);
+                        NewsList l = postSnapshot.getValue(NewsList.class);
 //                        Log.e("TAG",l.getObtainedMarks());
                         //add these values inside Arraylist
                         Log.e("TAG", postSnapshot.getKey());
-                        classesLists.add(l);
+                        newsLists.add(l);
                     }
                     //pass the ArrayList in the constructor of RollNoAdapter
-                    adapterClasses = new ClassesAdapter(getContext(), classesLists);
+                    adapterNews = new NewsAdapter(getContext(), newsLists);
                     //After completing the process of Adapter set the adapter to the recyclerview
-                    recycler_classes.setAdapter(adapterClasses);
+                    recycler_news.setAdapter(adapterNews);
                     //Whenever the data is changed it will inform the adapter
-                    adapterClasses.notifyDataSetChanged();
+                    adapterNews.notifyDataSetChanged();
                 }
             }
 
@@ -124,11 +112,11 @@ public class ClassesFragment extends Fragment {
 
 
         LayoutInflater inflater = this.getLayoutInflater();
-        View add_item_layout_beneficiary = inflater.inflate(R.layout.add_new_item_layout_classes, null);
+        View add_item_layout_news = inflater.inflate(R.layout.add_new_item_layout_news, null);
 
-        name = add_item_layout_beneficiary.findViewById(R.id.name);
-        time = add_item_layout_beneficiary.findViewById(R.id.time);
-        alertDialog.setView(add_item_layout_beneficiary);
+        title = add_item_layout_news.findViewById(R.id.title);
+        desp = add_item_layout_news.findViewById(R.id.desp);
+        alertDialog.setView(add_item_layout_news);
 
 //        alertDialog.setIcon(R.drawable.ic_baseline_add_24);
 
@@ -139,14 +127,16 @@ public class ClassesFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
 
-                String id = itemListClasses.push().getKey();
-                ClassesList classesList = new ClassesList(
+                getcurrentDateTime();
+                String id = itemListNews.push().getKey();
+                NewsList newsList = new NewsList(
                         id,
-                        name.getText().toString(),
-                        time.getText().toString()
+                        title.getText().toString(),
+                        desp.getText().toString(),
+                        saveCurrentTime+" - "+saveCurrentDate
                 );
-                if (classesList != null) {
-                    itemListClasses.child(id).setValue(classesList);
+                if (newsList != null) {
+                    itemListNews.child(id).setValue(newsList);
 //                    beneficiaryLists.clear();
 //                    Snackbar.make(rootLayout, "New Category" + newFood.getName() + "was added", Snackbar.LENGTH_LONG).show();
                     Toast.makeText(getActivity(), "New item added", Toast.LENGTH_LONG).show();
@@ -163,4 +153,13 @@ public class ClassesFragment extends Fragment {
 
     }
 
+    public static void getcurrentDateTime(){
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
+        saveCurrentDate = currentDate.format(calendar.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
+        saveCurrentTime = currentTime.format(calendar.getTime());
+    }
 }

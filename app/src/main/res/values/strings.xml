@@ -9,6 +9,6 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_classes">Classes</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_article">Article</string>
+    <string name="menu_news">News</string>
 </resources>
