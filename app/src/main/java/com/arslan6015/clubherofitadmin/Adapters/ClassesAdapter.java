@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.arslan6015.clubherofitadmin.Interface.ItemClickListener;
 import com.arslan6015.clubherofitadmin.Model.ClassesList;
 import com.arslan6015.clubherofitadmin.R;
+import com.arslan6015.clubherofitadmin.SeeBooking;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
@@ -44,9 +46,17 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.name_classes_item.setText(classesLists.get(position).getName());
         holder.time_classes_item.setText(classesLists.get(position).getTime());
+        holder.booking_classes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent seeBooking = new Intent(context, SeeBooking.class);
+                seeBooking.putExtra("ClassId",classesLists.get(position).getId());
+                context.startActivity(seeBooking);
+            }
+        });
 
 //        In onBindViewHolder whenever
         holder.setItemClickListener(new ItemClickListener() {
@@ -71,6 +81,7 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ViewHold
             implements View.OnClickListener {
         // declare list_data.xml Textview
         public TextView name_classes_item, time_classes_item;
+        Button booking_classes;
         // create object of interface
         private ItemClickListener itemClickListener;
 
@@ -80,6 +91,7 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ViewHold
             //initialize the textview of list_data.xml
             name_classes_item = itemView.findViewById(R.id.name_classes_item);
             time_classes_item = itemView.findViewById(R.id.time_classes_item);
+            booking_classes = itemView.findViewById(R.id.booking_classes);
             //whenever any of the item in the recyclerview is clicked
             itemView.setOnClickListener(this);
 

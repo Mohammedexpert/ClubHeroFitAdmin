@@ -268,7 +268,6 @@ public class ArticleActivity extends AppCompatActivity {
         getcurrentDateTime();
         post.setTimeStamp(saveCurrentTime+" - "+saveCurrentDate);
 
-
         // add post data to firebase database
 
         myRef.child(intPostkey).setValue(post).addOnSuccessListener(new OnSuccessListener<Void>() {
